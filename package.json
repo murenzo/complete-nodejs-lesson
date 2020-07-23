@@ -1,0 +1,23 @@
+{
+  "name": "complete-nodejs-lesson",
+  "version": "1.0.0",
+  "description": "Complete Node.JS Guide",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murenzo/complete-nodejs-lesson.git"
+  },
+  "author": "Abdulazeez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/murenzo/complete-nodejs-lesson/issues"
+  },
+  "homepage": "https://github.com/murenzo/complete-nodejs-lesson#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
