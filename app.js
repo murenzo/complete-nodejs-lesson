@@ -19,6 +19,6 @@ app.use(shopRoutes);
 
 //Handles 404 request
 app.use((req, res, next) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { docTitle: "404" });
 });
 app.listen(3500);
