@@ -15,6 +15,7 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  const products = Product.fetchAll();
-  res.render("shop", { pageTitle: "Shop", products: products, path: "/" });
+  const products = Product.fetchAll(function (products) {
+    res.render("shop", { pageTitle: "Shop", products: products, path: "/" });
+  });
 };
