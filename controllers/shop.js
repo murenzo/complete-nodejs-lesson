@@ -18,10 +18,17 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll(function (products) {
+  Product.fetchAll(function(products) {
     res.render(
       "shop/product-list",
       { pageTitle: "Product List", products: products, path: "/products" },
     );
   });
 };
+
+exports.getProduct = (req, res, next) => {
+  const {productId} = req.params;
+  Product.findById(productId, function(product) {
+    res.render("shop/product-detail", { pageTitle: "Product details", product: product , path: "/products"});
+  });
+}

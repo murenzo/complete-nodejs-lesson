@@ -6,6 +6,12 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-      <h2>Product Detail Page</h2>
+      <% if(product) { %>
+      <div class="grid">
+        <%- include('../shared/product.ejs', {product: product}) %>
+      </div>
+      <% } else { %>
+      <h2>No Products Found</h2>
+      <% } %>
     </main>
 <%- include('../includes/footer.ejs') %>
