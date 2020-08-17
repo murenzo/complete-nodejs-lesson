@@ -34,4 +34,33 @@ module.exports = class Cart {
             })
         })
     }
+
+    static deleteProduct(id, productPrice, cb) {
+        fs.readFile(p, (err, fileContents) => {
+            if(err) {
+                console.log("Error happened inside Cart delete product function");
+                return;
+            }
+            const cartContents = JSON.parse(fileContents);
+
+            const product = cartContents.products.find(prod => prod.id === id);
+
+            const productQty = product.qty;
+
+            cartContents.products = cartContents.products.filter(prod => prod.id !== id);
+
+            cartContents.priceTotal = cartContents.priceTotal - productPrice * productQty;
+
+            fs.writeFile(p, JSON.stringify(cartContents), err => {
+                if(err) {
+                    console.log(err);
+                }
+
+                cb();
+            });
+
+        });
+    }
+
+
 }
