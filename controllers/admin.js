@@ -19,14 +19,14 @@ exports.getEditProduct = (req, res, next) => {
   Product.findById(productId, product => {
     res.render("admin/edit-product", { pageTitle: "Edit Product", path: "/admin/products", product: product});
   });
-}
+};
 
 exports.postEditProduct = (req, res, next) => {
   const { id, title, imageUrl, price, description } = req.body;
   const product = new Product(id, title, imageUrl, description, price);
   product.update();
-  res.redirect("/admin/products")
-}
+  res.redirect("/admin/products");
+};
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll((products) => {
@@ -41,3 +41,9 @@ exports.getProducts = (req, res, next) => {
   });
 };
 
+exports.deleteProduct = (req, res, next) => {
+  const {productId} = req.body;
+  Product.deleteProduct(productId, function() {
+    res.redirect("/admin/products");
+  });
+}
