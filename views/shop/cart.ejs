@@ -6,6 +6,14 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-      <h2>Cart Page</h2>
+      <% if(products.length) { %>
+      <ul>
+        <% for(let product of products) { %>
+          <li><%= product.data.title %> (<%= product.quantity %>)</li>
+        <% } %>
+      </ul>
+      <% } else { %>
+      <h2>No products found in cart.</h2>
+      <% } %>
     </main>
 <%- include('../includes/footer.ejs') %>
