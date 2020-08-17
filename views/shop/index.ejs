@@ -9,7 +9,7 @@
       <% if(products.length) { %>
       <div class="grid">
         <% for(let product of products) { %>
-          <%- include('../shared/product.ejs', {product: product}) %>
+          <%- include('../shared/product.ejs', {product: product, admin: false}) %>
         <% } %>
       </div>
       <% } else { %>
