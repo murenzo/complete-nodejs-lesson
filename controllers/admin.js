@@ -16,7 +16,7 @@ exports.postAddProduct = (req, res, next) => {
     imageUrl: imageUrl,
     description: description
   }).then(response => {
-    res.redirect("products");
+    res.redirect("/admin/products");
   })
   .catch(error => console.log(error));
 };
@@ -65,7 +65,6 @@ exports.deleteProduct = (req, res, next) => {
       id: productId
     }
   }).then(response => {
-    console.log(response);
     res.redirect("/admin/products");
   }).catch(error => {
     console.log(error);
