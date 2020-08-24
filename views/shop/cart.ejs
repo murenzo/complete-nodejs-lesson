@@ -5,20 +5,21 @@
   <body>
     <%- include('../includes/navigation.ejs') %>
 
-    <main>
+    <main style="display: flex; justify-content: center;">
       <% if(products.length) { %>
-      <ul>
+        <div class="cart-container">
         <% for(let product of products) { %>
-          <li>
-            <p><%= product.title %> (<%= product.cartItem.quantity %>)</p>
+          <div class="cart-section">
+            <h3 class="cart-title"><%= product.title %></h3>
+            <h4 class="cart-quantity">Quantity: (<%= product.cartItem.quantity %>)</h4>
+            
             <form action="/cart-delete-item" method="POST">
               <input type="hidden" name="productId" value="<%= product.id %>">
-              <input type="hidden" name="productPrice" value="<%= product.price %>">
-              <button type="submit" class="btn">Remove from cart</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-          </li>
+        </div>
         <% } %>
-      </ul>
+      </div>
       <% } else { %>
       <h2>No products found in cart.</h2>
       <% } %>

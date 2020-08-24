@@ -187,14 +187,46 @@ form {
   cursor: pointer;
 }
 
+.btn-danger {
+  border: 1px solid red;
+  color: red;
+  font-size: 13px;
+}
+
 .btn:hover,
 .btn:active {
   background-color: #00695c;
   color: white;
 }
 
+.btn-danger:hover,
+.btn-danger:active {
+  background-color: red;
+  color: white;
+}
+
 .centered {
   text-align: center;
+}
+
+.cart-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cart-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  width: 650px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.cart-section > h3, h4 {
+  margin: 0;
 }
 
 @media (min-width: 768px) {
