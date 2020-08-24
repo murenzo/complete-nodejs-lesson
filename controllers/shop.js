@@ -17,19 +17,15 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  Cart.getCart(cart => {
-    Product.fetchAll(products => {
-      const cartProducts = [];
-
-      for(product of products) {
-        const cartProductIndex = cart.products.findIndex(prod => prod.id === product.id);
-        if(cartProductIndex >= 0) {
-          cartProducts.push({data: product, quantity: cart.products[cartProductIndex].qty});
-        }
-      }
-      res.render("shop/cart", { pageTitle: "Cart", path: "/cart", products: cartProducts });
+  req.user.getCart().
+  then(cart => {
+    return cart.getProducts()
+    .then(products => {
+      res.render("shop/cart", { pageTitle: "Cart", path: "/cart", products: products });
     })
+    .catch(error => console.log(error));
   })
+  .catch(error => console.log(error));
 };
 
 exports.postCart = (req, res, next) => {
