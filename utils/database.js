@@ -1,5 +1,16 @@
-const Sequelize = require('sequelize');
+const MongoClient = require('mongodb').MongoClient;
 
-const sequelize = new Sequelize('nodecomplete', 'root', 'Faiztech.01',{dialect: 'mysql', host: 'localhost'});
+const uri = "mongodb+srv://murenzo:Faiztech.01@cluster0.0mlio.mongodb.net/node-lesson?retryWrites=true&w=majority";
 
-module.exports = sequelize;
+const mongoConnect = (cb) => {
+    const client = new MongoClient(uri, { useUnifiedTopology: true });
+    client.connect()
+    .then(client => {
+    cb(client);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+
+module.exports = mongoConnect;
