@@ -1,5 +1,4 @@
 const {getDb} = require("../utils/database");
-const { get } = require("../routes/admin");
 
 class Product {
   constructor(title, imageUrl, price, description) {
@@ -11,8 +10,18 @@ class Product {
 
   save() {
     const db = getDb();
-    db.collection('products').insertOne(this)
+    return db.collection("products").insertOne(this)
     .then(result => console.log(result))
+    .catch(error => console.log(error));
+  }
+
+  static fetchAll() {
+    const db = getDb();
+    return db.collection("products").find().toArray()
+    .then(prodcuts => {
+      console.log(prodcuts);
+      return prodcuts;
+    })
     .catch(error => console.log(error));
   }
 }
