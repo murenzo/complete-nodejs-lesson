@@ -4,14 +4,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const errorController = require("./controllers/error");
-const mongoConnect = require("./utils/database");
+const {mongoConnect} = require("./utils/database");
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-// const adminRoutes = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 // const shopRoutes = require("./routes/shop");
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,14 +24,14 @@ app.use((req, res, next) => {
     //     next();
     // })
     // .catch(error => console.log(error));
+    next();
 })
 
-// app.use("/admin", adminRoutes);
+app.use("/admin", adminRoutes);
 // app.use(shopRoutes);
 
 app.use(errorController.getPageNotFound);
 
-mongoConnect(client => {
-    console.log(client);
+mongoConnect(() => {
     app.listen(3500);
 })
