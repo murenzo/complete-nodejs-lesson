@@ -92,13 +92,18 @@ exports.getProducts = (req, res, next) => {
   .catch(error => console.log(error));
 };
 
-// exports.getProduct = (req, res, next) => {
-//   const {productId} = req.params;
-//   Product.findByPk(productId).then(product => {
-//     res.render("shop/product-detail", { pageTitle: product.title, product: product, path: "/products"});
-//   })
-//   .catch(error => console.log(error));
-// }
+exports.getProduct = (req, res, next) => {
+  const {productId} = req.params;
+  Product.findById(productId)
+  .then(product => {
+    res.render("shop/product-detail", { pageTitle: product.title, product: product, path: "/products"});
+  })
+  .catch(error => console.log(error));
+  // Product.findByPk(productId).then(product => {
+  //   res.render("shop/product-detail", { pageTitle: product.title, product: product, path: "/products"});
+  // })
+  // .catch(error => console.log(error));
+}
 
 // exports.postOrder = (req, res, next) => {
 //   let fetchedCart;
