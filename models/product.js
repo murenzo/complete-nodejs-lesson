@@ -1,7 +1,6 @@
 const mongodb = require("mongodb");
 
 const {getDb} = require("../utils/database");
-const { use } = require("../routes/shop");
 
 class Product {
   constructor(title, imageUrl, price, description, id, userId) {
@@ -42,7 +41,6 @@ class Product {
     const db = getDb();
     return db.collection("products").find({ _id: new mongodb.ObjectId(id) }).next()
     .then(product => {
-      console.log(product)
       return product;
     })
     .catch(error => console.log(error));
