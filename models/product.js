@@ -1,6 +1,7 @@
 const mongodb = require("mongodb");
 
 const {getDb} = require("../utils/database");
+const { response } = require("express");
 
 class Product {
   constructor(title, imageUrl, price, description, id) {
@@ -8,7 +9,7 @@ class Product {
     this.imageUrl = imageUrl;
     this.price = price;
     this.description = description;
-    this._id = id;
+    this._id = id ? new mongodb.ObjectId(id) : null;
   }
 
   save() {
@@ -17,7 +18,7 @@ class Product {
 
     if(this._id) {
       dbOps = db.collection("products")
-      .updateOne({_id: new mongodb.ObjectId(this._id)}, {$set: {title: this.title, imageUrl: this.imageUrl, price: this.price, description: this.description}})
+      .updateOne({_id: this._id}, {$set: this})
     } else {
       dbOps = db.collection("products")
       .insertOne(this);
@@ -43,6 +44,13 @@ class Product {
       console.log(product)
       return product;
     })
+    .catch(error => console.log(error));
+  }
+
+  static deleteById(id) {
+    const db = getDb();
+    return db.collection("products").deleteOne({ _id: new mongodb.ObjectId(id) })
+    .then(response => console.log("Deleted"))
     .catch(error => console.log(error));
   }
 }
