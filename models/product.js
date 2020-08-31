@@ -1,7 +1,6 @@
 const mongodb = require("mongodb");
 
 const {getDb} = require("../utils/database");
-const { response } = require("express");
 
 class Product {
   constructor(title, imageUrl, price, description, id) {
