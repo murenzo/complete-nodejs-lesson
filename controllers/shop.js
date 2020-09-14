@@ -19,17 +19,13 @@ exports.getIndex = (req, res, next) => {
 //   .catch(error => console.log(error));
 // };
 
-// exports.getCart = (req, res, next) => {
-//   req.user.getCart().
-//   then(cart => {
-//     return cart.getProducts()
-//     .then(products => {
-//       res.render("shop/cart", { pageTitle: "Cart", path: "/cart", products: products });
-//     })
-//     .catch(error => console.log(error));
-//   })
-//   .catch(error => console.log(error));
-// };
+exports.getCart = (req, res, next) => {
+  req.user.getCart()
+    .then(products => {
+      res.render("shop/cart", { pageTitle: "Cart", path: "/cart", products: products });
+    })
+    .catch(error => console.log(error));
+};
 
 exports.postCart = (req, res, next) => {
   const {productId} = req.body;
@@ -39,7 +35,7 @@ exports.postCart = (req, res, next) => {
     return req.user.addToCart(product)
   })
   .then(result => {
-    console.log(result);
+    res.redirect('cart')
   })
   .catch(error => console.log(error));
   // let newQuantity = 1;
